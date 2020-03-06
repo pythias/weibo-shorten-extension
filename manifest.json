@@ -1,0 +1,40 @@
+{
+  "name": "微博t.cn短连接生成器",
+  "version": "1.0",
+  "description": "通过微博生成t.cn短连接",
+  "permissions": [
+    "tabs", 
+    "activeTab",
+    "declarativeContent",
+    "https://weibo.com/*",
+    "contextMenus", 
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.weibo.com/*"],
+      "js": ["utils.js"]
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "homepage_url": "https://weibo.com/u/1763952531",
+  "browser_action": {
+    "default_popup": "shorten.html",
+    "default_icon": {
+      "16": "images/shorten-16.png",
+      "32": "images/shorten-32.png",
+      "48": "images/shorten-48.png",
+      "128": "images/shorten-128.png"
+    }
+  },
+  "icons": {
+    "16": "images/shorten-16.png",
+    "32": "images/shorten-32.png",
+    "48": "images/shorten-48.png",
+    "128": "images/shorten-128.png"
+  },
+  "manifest_version": 2
+}

@@ -1,0 +1,36 @@
+.article {
+    color: #252525;
+    font-size: 14px;
+    margin: 0;
+    padding: 16px;
+}
+
+.footer {
+    background-color: lightgray;
+    color: darkgray;
+    font-size: 11px;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 420px
+}
+
+.shorten {
+    font-size: 14px;
+    margin: 2px;
+    height: 23px;
+}
+
+.button-shorten {
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    min-width: 54px;
+}
+
+#input-long {
+    width: 80%;
+}
