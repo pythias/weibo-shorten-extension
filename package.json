@@ -1,0 +1,30 @@
+{
+  "name": "shorten-extension",
+  "version": "1.0.2",
+  "description": "Chrome Extension of Url Shorten",
+  "scripts": {
+    "test": "grunt travis"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pythias/shorten-extension.git"
+  },
+  "keywords": [
+    "Extension",
+    "Chrome",
+    "Url Shorten"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "jshint": "^2.9.5"
+  },
+  "author": "pythias <pythias@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pythias/shorten-extension/issues"
+  },
+  "homepage": "https://github.com/pythias/shorten-extension#readme"
+}

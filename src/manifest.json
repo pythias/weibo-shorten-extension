@@ -5,8 +5,7 @@
   "permissions": [
     "activeTab",
     "https://weibo.com/*",
-    "contextMenus",
-    "notifications"
+    "contextMenus"
   ],
   "content_scripts": [
     {

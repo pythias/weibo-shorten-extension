@@ -1,5 +1,6 @@
-"use strict";
-
+/* jshint browser:true */
+/* jshint esversion: 6 */
+/* global chrome */
 const shortenButton = document.getElementById("button-shorten");
 const inputLong = document.getElementById("input-long");
 
