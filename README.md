@@ -4,3 +4,6 @@
 [![Build Status](https://travis-ci.org/pythias/shorten-extension.svg?branch=master)](https://travis-ci.org/pythias/shorten-extension)
 
 快捷生成微博短连接
+
+- 右键生成
+- 输入生成
