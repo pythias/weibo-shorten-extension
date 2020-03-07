@@ -1,0 +1,11 @@
+{ 
+    "browser": true,
+    "moz": true,
+    "strict": false,
+    "esversion": 6,
+    "globals": {
+        "chrome": false, 
+        "shortenOnNewTab": true,
+        "alert": false
+    }
+}

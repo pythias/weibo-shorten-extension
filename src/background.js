@@ -1,7 +1,3 @@
-/* jshint browser:true */
-/* jshint esversion: 6 */
-/* global chrome */
-/* global shortenOnNewTab */
 chrome.runtime.onInstalled.addListener(function () {
     chrome.contextMenus.create({
         id: "shorten-menu",

@@ -1,7 +1,3 @@
-/* jshint browser:true */
-/* jshint esversion: 6 */
-/* global alert */
-/* global chrome */
 var shorten = function (longUrl, tabId) {
     const body = "location=v6_content_home&text=" + encodeURIComponent(longUrl) + 
         "&appkey=&style_type=1&pic_id=&tid=&pdetail=&mid=&isReEdit=false&rank=1&" + 
@@ -42,31 +38,44 @@ var removeByMid = function (mid) {
     request(url, body);
 };
 
-var request = async function (url, body, callback = null) {
-    const response = await fetch(url, {
-        "headers": {
-            "Accept": "*/*",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7",
-            "Connection": "keep-alive",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Referer": "https://weibo.com/",
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36",
-            "X-Requested-With": "XMLHttpRequest"
-        },
-        "referrer": "https://weibo.com/",
-        "referrerPolicy": "origin",
-        "body": body,
-        "method": "POST",
-        "mode": "cors",
-        "credentials": "same-origin",
-    });
-
-    if (callback !== null) {
-        const json = await response.json();
-        callback(json);
-    }
+var request = function(url, body, callback = null) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(body);
+    xhr.onload = (e) => {
+        let json = JSON.parse(xhr.responseText);
+        if (callback !== null) {
+            callback(json);
+        }
+    };
 };
+
+// var request = async function (url, body, callback = null) {
+//     const response = await fetch(url, {
+//         "headers": {
+//             "Accept": "*/*",
+//             "Accept-Encoding": "gzip, deflate, br",
+//             "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7",
+//             "Connection": "keep-alive",
+//             "Content-Type": "application/x-www-form-urlencoded",
+//             "Referer": "https://weibo.com/",
+//             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36",
+//             "X-Requested-With": "XMLHttpRequest"
+//         },
+//         "referrer": "https://weibo.com/",
+//         "referrerPolicy": "origin",
+//         "body": body,
+//         "method": "POST",
+//         "mode": "cors",
+//         "credentials": "same-origin",
+//     });
+
+//     if (callback !== null) {
+//         const json = await response.json();
+//         callback(json);
+//     }
+// };
 
 var copyToClipboard = function (text) {
     const input = document.createElement("input");

@@ -1,8 +1,12 @@
-/* jshint browser:true */
-/* jshint esversion: 6 */
-/* global chrome */
 const shortenButton = document.getElementById("button-shorten");
 const inputLong = document.getElementById("input-long");
+
+inputLong.addEventListener("keyup", function(e) {
+    if (event.keyCode === 13) {
+        e.preventDefault();
+        shortenButton.click();
+    }
+});
 
 shortenButton.addEventListener("click", function (e) {
     e.preventDefault();
