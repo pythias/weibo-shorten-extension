@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 chrome.runtime.onInstalled.addListener(function () {
     chrome.contextMenus.create({

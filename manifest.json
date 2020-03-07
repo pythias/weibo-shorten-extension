@@ -1,19 +1,21 @@
 {
   "name": "微博t.cn短连接生成器",
-  "version": "1.0",
+  "version": "1.0.2",
   "description": "通过微博生成t.cn短连接",
   "permissions": [
-    "tabs", 
     "activeTab",
-    "declarativeContent",
     "https://weibo.com/*",
-    "contextMenus", 
+    "contextMenus",
     "notifications"
   ],
   "content_scripts": [
     {
-      "matches": ["*://*.weibo.com/*"],
-      "js": ["utils.js"]
+      "matches": [
+        "*://*.weibo.com/*"
+      ],
+      "js": [
+        "utils.js"
+      ]
     }
   ],
   "background": {
