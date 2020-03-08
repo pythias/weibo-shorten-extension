@@ -1,6 +1,8 @@
 var shorten = function (longUrl, tabId) {
-    const body = "location=v6_content_home&text=" + encodeURIComponent(longUrl) + 
-        "&appkey=&style_type=1&pic_id=&tid=&pdetail=&mid=&isReEdit=false&rank=1&" + 
+    longUrl = unescape(decodeURI(longUrl));
+    const text = "shorten " + encodeURI(longUrl) + " at " + new Date().getTime();
+    const body = "location=v6_content_home&text=" + text +
+        "&appkey=&style_type=1&pic_id=&tid=&pdetail=&mid=&isReEdit=false&rank=1&" +
         "rankid=&module=stissue&pub_source=main_&pub_type=dialog&isPri=0&_t=0";
     const url = "https://weibo.com/aj/mblog/add?ajwvr=6&__rnd=" + new Date().getTime();
     request(url, body, function (json) {
@@ -38,7 +40,7 @@ var removeByMid = function (mid) {
     request(url, body);
 };
 
-var request = function(url, body, callback = null) {
+var request = function (url, body, callback = null) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -64,8 +66,8 @@ var copyToClipboard = function (text) {
 
 var showMessage = function (message, callback = null) {
     alert(message);
-    
-    if (callback !== null) { 
+
+    if (callback !== null) {
         callback();
     }
 };
@@ -74,13 +76,16 @@ function shortenOnNewTab(url) {
     chrome.tabs.create({
         url: "https://weibo.com"
     }, function (tab) {
+        url = encodeURI(escape(url));
+        code = "var request = (" + request + ");\n" +
+            "var removeByMid = (" + removeByMid + ");\n" +
+            "var copyToClipboard = (" + copyToClipboard + ");\n" +
+            "var showMessage = (" + showMessage + ");\n" +
+            "var shorten = (" + shorten + ");\n" +
+            "shorten('" + url + "', " + tab.id + ");";
+
         chrome.tabs.executeScript(tab.id, {
-            code: "var request = (" + request + ");\n" + 
-                "var removeByMid = (" + removeByMid + ");\n" + 
-                "var copyToClipboard = (" + copyToClipboard + ");\n" + 
-                "var showMessage = (" + showMessage + ");\n" + 
-                "var shorten = (" + shorten + ");\n" + 
-                "shorten('" + url + "', " + tab.id + ");",
+            code: code,
         });
     });
 }
