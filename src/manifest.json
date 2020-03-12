@@ -1,7 +1,7 @@
 {
-  "name": "微博t.cn短连接生成器",
-  "version": "1.0.5",
-  "description": "通过微博生成t.cn短连接",
+  "name": "缩短网址",
+  "version": "1.0.6",
+  "description": "使用微博™将长网址缩短成t.cn的短网址",
   "permissions": [
     "activeTab",
     "https://weibo.com/*",
