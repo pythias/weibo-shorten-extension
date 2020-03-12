@@ -1,6 +1,8 @@
 var shorten = function (longUrl, tabId) {
     longUrl = unescape(decodeURI(longUrl));
-    const text = "shorten " + encodeURI(longUrl) + " at " + new Date().getTime();
+    console.log("long url: " + longUrl);
+    
+    const text = "shorten " + encodeURIComponent(longUrl) + " at " + new Date().getTime();
     const body = "location=v6_content_home&text=" + text +
         "&appkey=&style_type=1&pic_id=&tid=&pdetail=&mid=&isReEdit=false&rank=1&" +
         "rankid=&module=stissue&pub_source=main_&pub_type=dialog&isPri=0&_t=0";
@@ -20,6 +22,7 @@ var shorten = function (longUrl, tabId) {
             }
 
             const shortUrl = "https://t.cn/" + matches[1];
+            console.log("short url: " + shortUrl);
             copyToClipboard(shortUrl);
             showMessage("短地址为：" + shortUrl + "，已复制到剪贴板", () => {
                 chrome.runtime.sendMessage({ type: "tab-remove", data: { id: tabId } });
@@ -29,6 +32,7 @@ var shorten = function (longUrl, tabId) {
             const mid = midMatches[1];
             removeByMid(mid);
         } catch (error) {
+            console.error(error);
             alert(error);
         }
     });
