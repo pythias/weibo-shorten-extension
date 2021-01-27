@@ -1,3 +1,4 @@
+
 chrome.runtime.onInstalled.addListener(function () {
     chrome.contextMenus.create({
         id: "shorten-menu",
@@ -9,11 +10,15 @@ chrome.runtime.onInstalled.addListener(function () {
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     switch (message.type) {
         case "shorten-button":
-            shortenOnNewTab(message.data.long);
+            shorten(message.data.long);
+            break;
+
+        case "shorten":
+            shortenOnTab(message.data.long, message.data.id);
             break;
 
         case "tab-remove":
-            chrome.tabs.remove(message.data.id);
+            //chrome.tabs.remove(message.data.id);
             break;
 
         default:
@@ -24,7 +29,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
     switch (info.menuItemId) {
         case "shorten-menu":
-            shortenOnNewTab(info.linkUrl);
+            shorten(info.linkUrl);
             break;
 
         default:

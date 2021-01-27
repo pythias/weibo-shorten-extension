@@ -1,7 +1,9 @@
-var shorten = function (longUrl, tabId) {
+"use strict";
+
+const shortenOnTab = function (longUrl, tabId) {
     longUrl = unescape(decodeURI(longUrl));
     console.log("long url: " + longUrl);
-    
+
     const text = "shorten " + encodeURIComponent(longUrl) + " at " + new Date().getTime();
     const body = "location=v6_content_home&text=" + text +
         "&appkey=&style_type=1&pic_id=&tid=&pdetail=&mid=&isReEdit=false&rank=1&" +
@@ -54,13 +56,13 @@ var shorten = function (longUrl, tabId) {
     });
 };
 
-var removeByMid = function (mid) {
+const removeByMid = function (mid) {
     const url = "https://weibo.com/aj/mblog/del?ajwvr=6";
     const body = "mid=" + mid;
     request(url, body);
 };
 
-var request = function (url, body, callback = null) {
+const request = function (url, body, callback = null) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -73,7 +75,7 @@ var request = function (url, body, callback = null) {
     };
 };
 
-var copyToClipboard = function (text) {
+const copyToClipboard = function (text) {
     const input = document.createElement("input");
     input.style.position = "fixed";
     input.style.opacity = 0;
@@ -84,7 +86,7 @@ var copyToClipboard = function (text) {
     document.body.removeChild(input);
 };
 
-var showMessage = function (message, callback = null) {
+const showMessage = function (message, callback = null) {
     alert(message);
 
     if (callback !== null) {
@@ -92,20 +94,13 @@ var showMessage = function (message, callback = null) {
     }
 };
 
-function shortenOnNewTab(url) {
+const shorten = function (url) {
     chrome.tabs.create({
         url: "https://weibo.com"
     }, function (tab) {
-        url = encodeURI(escape(url));
-        code = "var request = (" + request + ");\n" +
-            "var removeByMid = (" + removeByMid + ");\n" +
-            "var copyToClipboard = (" + copyToClipboard + ");\n" +
-            "var showMessage = (" + showMessage + ");\n" +
-            "var shorten = (" + shorten + ");\n" +
-            "shorten('" + url + "', " + tab.id + ");";
-
-        chrome.tabs.executeScript(tab.id, {
-            code: code,
-        });
+        const longUrl = encodeURI(escape(url));
+        const tabId = tab.id;
+            chrome.storage.local.set({ long: longUrl, tab: tabId });
+            chrome.tabs.executeScript(tabId, { file: 'js/content.js' });
     });
 }

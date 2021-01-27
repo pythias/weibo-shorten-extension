@@ -4,7 +4,7 @@ const spanVersion = document.getElementById("span-version");
 
 spanVersion.innerText = "v" + chrome.runtime.getManifest().version;
 
-inputLong.addEventListener("keyup", function(e) {
+inputLong.addEventListener("keyup", function (e) {
     if (event.keyCode === 13) {
         e.preventDefault();
         shortenButton.click();

@@ -5,37 +5,39 @@
   "permissions": [
     "activeTab",
     "https://weibo.com/*",
-    "contextMenus"
+    "contextMenus",
+    "storage"
   ],
   "content_scripts": [
     {
       "matches": [
-        "*://*.weibo.com/*"
+        "https://weibo.com/*"
       ],
       "js": [
-        "utils.js"
+        "js/utils.js",
+        "js/content.js"
       ]
     }
   ],
   "background": {
-    "page": "background.html",
+    "scripts": ["js/utils.js", "js/background.js"],
     "persistent": false
   },
   "homepage_url": "https://weibo.com/u/1763952531",
   "browser_action": {
     "default_popup": "shorten.html",
     "default_icon": {
-      "16": "images/shorten-16.png",
-      "32": "images/shorten-32.png",
-      "48": "images/shorten-48.png",
-      "128": "images/shorten-128.png"
+      "16": "image/shorten-16.png",
+      "32": "image/shorten-32.png",
+      "48": "image/shorten-48.png",
+      "128": "image/shorten-128.png"
     }
   },
   "icons": {
-    "16": "images/shorten-16.png",
-    "32": "images/shorten-32.png",
-    "48": "images/shorten-48.png",
-    "128": "images/shorten-128.png"
+    "16": "image/shorten-16.png",
+    "32": "image/shorten-32.png",
+    "48": "image/shorten-48.png",
+    "128": "image/shorten-128.png"
   },
   "manifest_version": 2
 }
