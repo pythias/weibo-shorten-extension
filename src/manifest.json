@@ -1,6 +1,6 @@
 {
-  "name": "缩短网址",
-  "version": "1.1",
+  "name": "URL Shorten 缩短网址",
+  "version": "1.2.0",
   "description": "使用微博™将长网址缩短成t.cn的短网址",
   "permissions": [
     "activeTab",
@@ -23,7 +23,7 @@
     "scripts": ["js/utils.js", "js/background.js"],
     "persistent": false
   },
-  "homepage_url": "https://weibo.com/u/1763952531",
+  "homepage_url": "https://jie.sh/",
   "browser_action": {
     "default_popup": "shorten.html",
     "default_icon": {
@@ -39,5 +39,6 @@
     "48": "image/shorten-48.png",
     "128": "image/shorten-128.png"
   },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx"
 }
