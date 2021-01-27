@@ -10,15 +10,11 @@ chrome.runtime.onInstalled.addListener(function () {
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     switch (message.type) {
         case "shorten-button":
-            shorten(message.data.long);
-            break;
-
-        case "shorten":
-            shortenOnTab(message.data.long, message.data.id);
+            shorten(message.data.url);
             break;
 
         case "tab-remove":
-            //chrome.tabs.remove(message.data.id);
+            chrome.tabs.remove(message.data.tab);
             break;
 
         default:

@@ -2,7 +2,7 @@
 
 const shortenOnTab = function (longUrl, tabId) {
     longUrl = unescape(decodeURI(longUrl));
-    console.log("long url: " + longUrl);
+    console.log("long: %s", longUrl);
 
     const text = "shorten " + encodeURIComponent(longUrl) + " at " + new Date().getTime();
     const body = "location=v6_content_home&text=" + text +
@@ -40,10 +40,10 @@ const shortenOnTab = function (longUrl, tabId) {
             }
 
             const shortUrl = "https://t.cn/" + matches[1];
-            console.log("short url: " + shortUrl);
+            console.log("short: %s", shortUrl);
             copyToClipboard(shortUrl);
             showMessage("短地址为：" + shortUrl + "，已复制到剪贴板", () => {
-                chrome.runtime.sendMessage({ type: "tab-remove", data: { id: tabId } });
+                chrome.runtime.sendMessage({ type: "tab-remove", data: { tab: tabId } });
             });
 
             const midMatches = html.match(/mid=(\d+)/);
@@ -100,7 +100,7 @@ const shorten = function (url) {
     }, function (tab) {
         const longUrl = encodeURI(escape(url));
         const tabId = tab.id;
-            chrome.storage.local.set({ long: longUrl, tab: tabId });
-            chrome.tabs.executeScript(tabId, { file: 'js/content.js' });
+        chrome.storage.local.set({ url: longUrl, tab: tabId });
+        chrome.tabs.executeScript(tabId, { file: 'js/content.js' });
     });
 }

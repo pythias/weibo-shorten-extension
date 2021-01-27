@@ -13,5 +13,5 @@ inputLong.addEventListener("keyup", function (e) {
 
 shortenButton.addEventListener("click", function (e) {
     e.preventDefault();
-    chrome.runtime.sendMessage({ type: "shorten-button", data: { long: inputLong.value } });
+    chrome.runtime.sendMessage({ type: "shorten-button", data: { url: inputLong.value } });
 });
