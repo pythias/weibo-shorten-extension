@@ -1,6 +1,6 @@
 {
   "name": "shorten-extension",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Chrome Extension of Url Shorten",
   "scripts": {
     "test": "grunt travis"

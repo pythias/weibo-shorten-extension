@@ -9,12 +9,28 @@ var shorten = function (longUrl, tabId) {
     const url = "https://weibo.com/aj/mblog/add?ajwvr=6&__rnd=" + new Date().getTime();
     request(url, body, function (json) {
         try {
-            if (json.code === 100002) {
+            if (json.code == 100002) {
                 showMessage("请先登录微博");
                 return;
             }
 
+            if (json.code == 100001) {
+                showMessage("您输入的网址疑似为不安全链接，无法发表，请谅解");
+                return;
+            }
+
+            if (json.code != 100000) {
+                console.log(json);
+                showMessage("发微博失败，请重试。");
+                return;
+            }
+
             const html = json.data.html;
+            if (html === null) {
+                showMessage("无效地址");
+                return;
+            }
+
             const matches = html.match(/\/t\.cn\/([0-9a-zA-Z]+)\"/);
             if (matches === null) {
                 showMessage("无效地址");
@@ -32,8 +48,8 @@ var shorten = function (longUrl, tabId) {
             const mid = midMatches[1];
             removeByMid(mid);
         } catch (error) {
-            console.error(error);
-            alert(error);
+            console.log(json, error);
+            showMessage("发微博失败，请重试。");
         }
     });
 };
