@@ -5,7 +5,7 @@
     "esversion": 6,
     "globals": {
         "chrome": false, 
-        "shortenOnNewTab": true,
+        "shortenOnTab": true,
         "alert": false
     }
 }
