@@ -1,3 +1,7 @@
 language: node_js
+before_script:
+  - npm install grunt-crx
+  - npm install grunt-contrib-jshint
+  - npm install grunt-cli
 node_js:
-  - "6"
+  - "15"
