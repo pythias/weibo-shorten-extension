@@ -1,3 +1,4 @@
+importScripts('utils.js');
 
 chrome.runtime.onInstalled.addListener(function () {
     chrome.contextMenus.create({
@@ -8,6 +9,7 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    console.log(message);
     switch (message.type) {
         case "shorten-button":
             shorten(message.data.url);
@@ -17,18 +19,25 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             chrome.tabs.remove(message.data.tab);
             break;
 
+        case "xsrf-token":
+            chrome.cookies.get({ url: "https://weibo.com", name: 'XSRF-TOKEN' }, function (cookie) {
+                if (cookie) {
+                    sendResponse({ token: cookie.value });
+                } else {
+                    sendResponse({ token: '' });
+                }
+            });
+            break;
+
         default:
             break;
     }
+    return true;
 });
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
-    switch (info.menuItemId) {
-        case "shorten-menu":
-            shorten(info.linkUrl);
-            break;
-
-        default:
-            break;
+    if (info.menuItemId === "shorten-menu") {
+        shorten(info.linkUrl);
     }
 });
+

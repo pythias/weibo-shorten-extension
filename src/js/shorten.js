@@ -5,13 +5,15 @@ const spanVersion = document.getElementById("span-version");
 spanVersion.innerText = "v" + chrome.runtime.getManifest().version;
 
 inputLong.addEventListener("keyup", function (e) {
-    if (event.keyCode === 13) {
+    if (e.key === "Enter") {
         e.preventDefault();
         shortenButton.click();
     }
 });
 
 shortenButton.addEventListener("click", function (e) {
+    console.log(e);
+
     e.preventDefault();
     chrome.runtime.sendMessage({ type: "shorten-button", data: { url: inputLong.value } });
 });

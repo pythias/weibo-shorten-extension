@@ -1,6 +1,15 @@
-chrome.storage.local.get(['url', 'tab'], function (data) {
-    if (typeof shortenOnTab !== 'undefined' && data.url !== undefined) {
-        chrome.storage.local.clear();
-        shortenOnTab(data.url, data.tab);
-    }
+console.log("content.js");
+
+window.addEventListener('load', function () {
+    chrome.runtime.sendMessage({ type: "xsrf-token" }, function (response) {
+        let token = response.token;
+        if (!token) {
+            return;
+        }
+
+        chrome.storage.local.get(['shortenUrl', 'shortenTabId'], function (result) {
+            chrome.storage.local.clear();
+            shortenOnTab(result.shortenUrl, result.shortenTabId, token);
+        });
+    });
 });
