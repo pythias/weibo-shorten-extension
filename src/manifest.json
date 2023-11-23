@@ -1,6 +1,6 @@
 {
   "name": "URL Shorten 缩短网址",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "manifest_version": 3,
   "description": "使用微博™将长网址缩短成t.cn的短网址",
   "permissions": [

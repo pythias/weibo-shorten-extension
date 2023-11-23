@@ -77,7 +77,7 @@ const shorten = function (url) {
         chrome.scripting.executeScript({
             target: { tabId: tabId },
             function: () => {
-                console.log("opened");
+                console.log("executeScript");
             }
         });
     });
